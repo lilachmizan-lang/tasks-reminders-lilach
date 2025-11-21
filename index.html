@@ -2,17 +2,20 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <title>משימות ותזכורות - לילך</title>
+    <title>משימות ותתי־משימות - לילך</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <h1>משימות ותזכורות 📋✨</h1>
+    <h1>משימות עם תתי־משימות 📋✨</h1>
 
     <div class="add-task">
-        <input id="taskText" type="text" placeholder="שם המשימה..." />
+        <input id="taskText" type="text" placeholder="שם המשימה הראשית..." />
         <input id="taskTime" type="datetime-local" />
-        <button onclick="addTask()">הוספה ➕</button>
+
+        <textarea id="subTasksText" placeholder="תתי־משימות (אחת בכל שורה)..."></textarea>
+
+        <button id="addTaskBtn">הוספה ➕</button>
     </div>
 
     <ul id="tasksList"></ul>
