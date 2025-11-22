@@ -1,0 +1,22 @@
+{
+  "name": "משימות לילך",
+  "short_name": "משימות",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f2ff",
+  "theme_color": "#b99bff",
+  "lang": "he-IL",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2917/2917600.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2917/2917600.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
