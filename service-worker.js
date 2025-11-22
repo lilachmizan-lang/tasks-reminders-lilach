@@ -1,9 +1,11 @@
-const CACHE_NAME = "tasks-lilach-v1";
+const CACHE_NAME = "tasks-lilach-v2";
 const URLS_TO_CACHE = [
   "./",
   "./index.html",
   "./style.css",
-  "./app.js"
+  "./app.js",
+  "./drive.html",
+  "./manifest.json"
 ];
 
 self.addEventListener("install", event => {
@@ -16,9 +18,8 @@ self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+        keys.filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
       )
     )
   );
