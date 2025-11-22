@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>מצב נהיגה - משימות לילך</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        body {
+            background:#f5eaff;
+            text-align:center;
+            padding:40px;
+        }
+        h1 {
+            font-size: 34px;
+            color:#6a4caf;
+            margin-bottom:30px;
+        }
+        #driveBtn {
+            width: 100%;
+            padding: 70px;
+            background:#b99bff;
+            border:none;
+            border-radius:40px;
+            font-size:40px;
+            color:white;
+            font-weight:bold;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+        #driveBtn:active {
+            background:#a578ff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>מצב נהיגה 🚗🎤</h1>
+
+    <button id="driveBtn">דברי ואני מוסיפה משימה 🎤</button>
+
+    <script>
+        let recognition;
+
+        if ("webkitSpeechRecognition" in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = "he-IL";
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onresult = function(event) {
+                const text = event.results[0][0].transcript;
+
+                const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+                const task = {
+                    id: Date.now(),
+                    text: text,
+                    time: new Date().toISOString(), 
+                    done: false,
+                    subtasks: []
+                };
+
+                tasks.push(task);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+
+                if (Notification.permission === "granted") {
+                    new Notification("נוספה משימה", {
+                        body: text
+                    });
+                }
+            };
+        } else {
+            alert("המכשיר לא תומך בזיהוי קול");
+        }
+
+        document.getElementById("driveBtn").onclick = () => {
+            if (recognition) recognition.start();
+        };
+    </script>
+
+</body>
+</html>
