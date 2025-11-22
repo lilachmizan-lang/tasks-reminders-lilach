@@ -1,7 +1,7 @@
 {
   "name": "משימות לילך",
   "short_name": "משימות",
-  "start_url": "./",
+  "start_url": "/tasks-reminders-lilach/index.html",
   "display": "standalone",
   "background_color": "#f7f2ff",
   "theme_color": "#b99bff",
