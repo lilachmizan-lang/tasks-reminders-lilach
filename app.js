@@ -2,8 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     loadTasks();
     requestNotificationPermission();
 
-    document.getElementById("addTaskBtn").addEventListener("click", addTask);
+    const addBtn = document.getElementById("addTaskBtn");
+    if (addBtn) {
+        addBtn.addEventListener("click", addTask);
+    }
+
+    registerServiceWorker();
 });
+
+// רישום service worker עבור PWA
+function registerServiceWorker() {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(err => console.log("Service Worker registration failed", err));
+    }
+}
 
 // בקשת הרשאת התראות
 function requestNotificationPermission() {
@@ -55,6 +69,9 @@ function saveTask(task) {
 // טעינת כל המשימות
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    const list = document.getElementById("tasksList");
+    list.innerHTML = "";
+
     tasks.forEach(task => {
         displayTask(task);
         scheduleReminder(task);
@@ -142,7 +159,7 @@ function scheduleReminder(task) {
 
 // התראה
 function showNotification(task) {
-    if (Notification.permission === "granted") {
+    if ("Notification" in window && Notification.permission === "granted") {
         new Notification("תזכורת 📌", {
             body: task.text,
             icon: "https://cdn-icons-png.flaticon.com/512/3214/3214464.png"
